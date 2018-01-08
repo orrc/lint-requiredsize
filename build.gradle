@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:3.0.1"
+    }
+}
+apply plugin: 'com.android.application'
+dependencies {
+    implementation project(':module')
+}
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion 27
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDir 'src'
+            res.srcDir 'res'
+        }
+    }
+    lintOptions {
+        check 'RequiredSize'
+    }
+}
+
+subprojects {
+    apply plugin: 'com.android.library'
+    android {
+        compileSdkVersion 27
+        defaultConfig {
+            minSdkVersion 9
+            targetSdkVersion 27
+        }
+    }
+}
